@@ -2,6 +2,8 @@ package com.src.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/UserLogin.view")
 public class UserLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public UserLogin() {
+    Map<String,String> errors=new HashMap();
+	public UserLogin() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,8 +24,13 @@ public class UserLogin extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		
-		
+		Map<String, String>errors=new HashMap<>();
+		if(!(request.getAttribute("errors") == null)){
+			errors.putAll((HashMap<String,String>)request.getAttribute("errors"));
+		}
+		else{
+			//do nothing
+		}
 		out.println("<!Doctype html>");
 		out.println("<head>");
 		request.getRequestDispatcher("WEB-INF/designcomponents/title.html").include(request,response);
@@ -40,6 +48,21 @@ public class UserLogin extends HttpServlet {
 		out.println("<td>");
 		out.println("<input type='text' name='username'>");
 		out.println("</td>");
+		out.println("<td>");
+		if(!errors.isEmpty()){
+		String usernameError=errors.get("username");
+		if(usernameError == null){
+			out.println("");
+		}
+		else{
+			out.println(usernameError);
+		}
+		}
+		else{
+			out.println("");
+		}
+		out.println("</td>");
+		
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td>");
@@ -47,6 +70,22 @@ public class UserLogin extends HttpServlet {
 		out.println("</td>");
 		out.println("<td>");
 		out.println("<input type='password' name='password'>");
+		out.println("</td>");
+		
+		out.println("<td>");
+		if(!errors.isEmpty()){
+			String passwordError=errors.get("password");
+			if(passwordError == null){
+				out.println("");
+			}
+			else{
+				out.println(passwordError);
+			}
+			
+		}
+		else{
+			out.println("");
+		}
 		out.println("</td>");
 		
 		out.println("</tr>");
