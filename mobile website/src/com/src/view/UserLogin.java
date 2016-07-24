@@ -41,6 +41,7 @@ public class UserLogin extends HttpServlet {
 		out.println("<form method='post' action='UserLoginVerify.do'>");
 		out.println("<div class='col-md-offset-3 col-xs-12' id='UserLogin'>");
 		out.println("<table class='table-condensed' >");
+		out.println("<th><h2>Login</h2></th>");
 		out.println("<tr>");
 		out.println("<td>");
 		out.println("username");
@@ -91,7 +92,7 @@ public class UserLogin extends HttpServlet {
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td>");
-		out.println("<input type='submit' value='Logi'>");
+		out.println("<input type='submit' value='Login'>");
 		out.println("</td>");
 		out.println("<td>");
 		out.println("<a href='UserSignup.view'>New User?</a>");
