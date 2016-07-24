@@ -91,8 +91,12 @@ public class UserLogin extends HttpServlet {
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td>");
-		out.println("<input type='submit' value='Login'>");
+		out.println("<input type='submit' value='Logi'>");
 		out.println("</td>");
+		out.println("<td>");
+		out.println("<a href='UserSignup.view'>New User?</a>");
+		out.println("</td>");
+
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</div>");
