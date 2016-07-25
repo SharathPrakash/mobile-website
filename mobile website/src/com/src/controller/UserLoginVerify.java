@@ -57,7 +57,7 @@ public class UserLoginVerify extends HttpServlet {
 			data.setPassword(request.getParameter("password"));
 		//	data.add(new UserLoginModel(request.getParameter(email),request.getParameter(password)));
 			request.setAttribute("data", data);
-			request.getRequestDispatcher("UserConnection.do").forward(request,response);
+			request.getRequestDispatcher("/UserConnection.do").forward(request,response);
 		}
 		
 		else{

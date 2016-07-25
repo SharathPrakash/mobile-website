@@ -42,10 +42,8 @@ public class UserConnection extends HttpServlet {
 			cs.setString(1,data.getEmail());
 			cs.setString(2,data.getPassword());
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
