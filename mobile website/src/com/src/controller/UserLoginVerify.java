@@ -3,6 +3,8 @@ package com.src.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,54 +13,55 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.src.model.UserLoginModel;
+
 @WebServlet("/UserLoginVerify.do")
 public class UserLoginVerify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String username;
+	private String email;
 	private String password;
     private Map<String,String> errors=new HashMap<String,String>();
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public UserLoginVerify() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
-		username=request.getParameter("username");
+		email=request.getParameter("email");
 		password=request.getParameter("password");
-		if(username==null||username.length()==0){
-			username="";
-			errors.put("username","username cannot be left blank");
+		if(email==null||email.length()==0){
+			email="";
+			errors.put("email","email cannot be left blank");
 		}
 		
-		else if(password==null||password.length()==0){
+		else if(password==null||password==""){
 			password="";
 			errors.put("password","password cannot be left blank");
+		}
+		
+		else if(password.length()<3){
+			password="";
+			errors.put("password","password must be atleast 3 charecters");
 		}
 		else {
 			errors.clear();
 		}
 		
 		if(errors.isEmpty()){
-			out.println("success");
+			UserLoginModel data=new UserLoginModel();
+			data.setEmail(request.getParameter("email"));
+			data.setPassword(request.getParameter("password"));
+		//	data.add(new UserLoginModel(request.getParameter(email),request.getParameter(password)));
+			request.setAttribute("data", data);
+			request.getRequestDispatcher("UserConnection.do").forward(request,response);
 		}
 		
 		else{
+			request.setAttribute("email",email);
 			request.setAttribute("errors", errors);
 			request.getRequestDispatcher("/UserLogin.view").forward(request, response);
 		}

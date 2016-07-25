@@ -50,7 +50,7 @@ public class UserSignup extends HttpServlet {
 		out.println("<form method='post' action='UserSignupVerify.do'>");
 		out.println("<div class='col-md-offset-3 col-xs-12' id='UserLogin'>");
 		out.println("<table class='table-condensed' >");
-		out.println("<th>Sign Up</th>");
+		out.println("<th><h2>Sign Up</h2></th>");
 		out.println("<tr>");
 		out.println("<td>");
 		out.println("First name");

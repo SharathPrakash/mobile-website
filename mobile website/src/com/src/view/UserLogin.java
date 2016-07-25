@@ -25,11 +25,19 @@ public class UserLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		Map<String, String>errors=new HashMap<>();
+		 String email="";
 		if(!(request.getAttribute("errors") == null)){
 			errors.putAll((HashMap<String,String>)request.getAttribute("errors"));
 		}
 		else{
 			//do nothing
+		}
+		if(request.getAttribute("email")==null){
+		email="";
+		}
+		else
+		{
+			email=(String)request.getAttribute("email");
 		}
 		out.println("<!Doctype html>");
 		out.println("<head>");
@@ -44,14 +52,14 @@ public class UserLogin extends HttpServlet {
 		out.println("<th><h2>Login</h2></th>");
 		out.println("<tr>");
 		out.println("<td>");
-		out.println("username");
+		out.println("E-mail");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<input type='text' name='username'>");
+		out.println("<input type='text' name='email' value="+email+">");
 		out.println("</td>");
 		out.println("<td>");
 		if(!errors.isEmpty()){
-		String usernameError=errors.get("username");
+		String usernameError=errors.get("email");
 		if(usernameError == null){
 			out.println("");
 		}
