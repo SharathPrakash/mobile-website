@@ -31,36 +31,53 @@ public class UserLoginVerify extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
-		email=request.getParameter("email");
-		password=request.getParameter("password");
+		//taking input parameters
+		email=request.getParameter("email").trim();
+		password=request.getParameter("password").trim();
+		//checking for errors in email
 		if(email==null||email.length()==0){
 			email="";
 			errors.put("email","email cannot be left blank");
-		}
+			//checking for errors in password when there is error in email
+			if(password==null||password==""){
+				password="";
+				errors.put("password","password cannot be left blank");
+			}
+			
+			else if(password.length()<3){
+				password="";
+				errors.put("password","password must be atleast 3 charecters");
+			}
 		
+		}
+		//checking for error in password when no error in email
 		else if(password==null||password==""){
 			password="";
+			errors.put("email","");
 			errors.put("password","password cannot be left blank");
 		}
 		
 		else if(password.length()<3){
 			password="";
+			errors.put("email","");
 			errors.put("password","password must be atleast 3 charecters");
 		}
+		//clearing error if stored from previous request
 		else {
 			errors.clear();
 		}
 		
 		if(errors.isEmpty()){
+			//checking email and password  in database
 			UserLoginModel data=new UserLoginModel();
 			data.setEmail(request.getParameter("email"));
 			data.setPassword(request.getParameter("password"));
-		//	data.add(new UserLoginModel(request.getParameter(email),request.getParameter(password)));
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("/UserConnection.do").forward(request,response);
 		}
 		
 		else{
+			//sending errors to the front page
 			request.setAttribute("email",email);
 			request.setAttribute("errors", errors);
 			request.getRequestDispatcher("/UserLogin.view").forward(request, response);

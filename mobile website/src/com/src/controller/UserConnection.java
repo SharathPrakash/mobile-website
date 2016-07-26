@@ -37,9 +37,11 @@ public class UserConnection extends HttpServlet {
 		UserLoginModel data=(UserLoginModel)request.getAttribute("data");
 		PrintWriter out=response.getWriter();
 		try {
+			//connecting to database jndl
 			Context ctx=new InitialContext();
 			DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/mobile_store");
 			Connection con =(Connection) ds.getConnection();
+			//calling procedure written in mysql mobile_store
 			CallableStatement cs=con.prepareCall("call passwordchecker(?,?,?)");
 			cs.setString(1,data.getEmail());
 			cs.setString(2,data.getPassword());
@@ -47,11 +49,12 @@ public class UserConnection extends HttpServlet {
 			ResultSet rs=cs.executeQuery();
 			while(rs.next()){
 			if(Integer.parseInt(rs.getString(1))==0){
-				out.println("wrong password");
-				
+				request.setAttribute("invalid","Email or password is wrong please try again");//msg to be printed if login is unsuccessful
+				request.getRequestDispatcher("/UserLogin.view").forward(request, response);
 			}
 			else{
 				out.println("success");
+			//must redirect to the front page
 			}
 			}
 		} catch (NamingException e) {
