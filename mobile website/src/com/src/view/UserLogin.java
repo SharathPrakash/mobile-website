@@ -51,7 +51,7 @@ public class UserLogin extends HttpServlet {
 		out.println("");
 		}
 		else{
-			out.println("<th><h5 style='color:red'>"+request.getAttribute("invalid")+"</h5></th>");
+			out.println("<th><h5 style='color:red'> <span class='glyphicon glyphicon-remove-circle'></span> &nbsp"+request.getAttribute("invalid")+"</h5></th>");
 		}
 		//-----------------------------------------------//
 		//email retention code
@@ -79,7 +79,7 @@ public class UserLogin extends HttpServlet {
 		//email error reporting 
 		if(!errors.isEmpty()){
 			if(errors.get("email")==null){
-			out.println(" ");
+			out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 			}
 		else{
 			out.println("<p style='color:red'>"+errors.get("email")+"</p>");
@@ -106,7 +106,7 @@ public class UserLogin extends HttpServlet {
 		if(!errors.isEmpty()){
 			
 			if(errors.get("password") == null||errors.get("password")==""){
-				out.println("");
+				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 			}
 			else{
 				out.println("<p style='color:red'>"+errors.get("password")+"</p>");
