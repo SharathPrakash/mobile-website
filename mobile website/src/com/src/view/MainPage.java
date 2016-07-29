@@ -76,7 +76,7 @@ public class MainPage extends HttpServlet {
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</div>");
-		session.invalidate();
+		//session.invalidate();
 		
 		out.println("</div>");
 		out.println("</div>");

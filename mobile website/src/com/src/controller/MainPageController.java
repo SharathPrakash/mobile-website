@@ -1,11 +1,17 @@
 package com.src.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.src.model.MainPageModel;
 
 /**
  * Servlet implementation class MainPageController
@@ -14,28 +20,39 @@ import javax.servlet.http.HttpServletResponse;
 public class MainPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public MainPageController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	doPost(request,response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	PrintWriter out =response.getWriter();
+	HttpSession session= request.getSession(false);
+	if(session == null){
+		request.getRequestDispatcher("/UserLogin.view").forward(request, response);
+				
+	}
+	else{
+		String[] rearCamera=request.getParameterValues("rearcamera");
+		String[] frontCamera=request.getParameterValues("frontcamera");
+		String[] screenSize=request.getParameterValues("screensize");
+		for(String s:rearCamera){
+		out.println(s);
+		}
+		
+		for(String s:frontCamera){
+			out.println(s);
+			}
+		
+		for(String s:screenSize){
+			out.println(s);
+			}
+			
+			
+	}
 	}
 
 }
