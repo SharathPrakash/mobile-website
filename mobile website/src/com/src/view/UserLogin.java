@@ -95,7 +95,7 @@ public class UserLogin extends HttpServlet {
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td>");
-		out.println("password");
+		out.println("Password");
 		out.println("</td>");
 		out.println("<td>");
 		out.println("<input type='password' name='password'>");
