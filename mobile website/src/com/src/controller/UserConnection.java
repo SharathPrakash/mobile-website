@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 //import com.mysql.jdbc.Connection;
@@ -53,8 +54,10 @@ public class UserConnection extends HttpServlet {
 				request.getRequestDispatcher("/UserLogin.view").forward(request, response);
 			}
 			else{
-				out.println("success");
-			//must redirect to the front page
+				HttpSession session=request.getSession();
+				session.setAttribute("connection", con);
+				request.getRequestDispatcher("/MainPage.view").forward(request,response);
+				
 			}
 			}
 		} catch (NamingException e) {

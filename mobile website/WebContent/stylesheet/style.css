@@ -6,6 +6,7 @@ nav{
   background-color: white;
 }
 #navigation{
+  opacity: 0.95;
   outline: none;
   width:100%;
   background-color: white;
@@ -44,7 +45,6 @@ nav{
  
   
 }
-
 #filter table{
   box-shadow:4px 4px 2px 3px rgb(33,124,126);
   border-radius:15px 15px 0px 15px;}
@@ -53,6 +53,6 @@ nav{
   
 }
 
-
-
-
+#centralimage {
+  margin-top: 3rem;
+}
