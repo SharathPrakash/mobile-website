@@ -24,10 +24,6 @@ public class MainPage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session=request.getSession(false);
-		if(session == null){
-			request.getRequestDispatcher("/UserLogin.view").forward(request,response);
-		}
-		else{
 		PrintWriter out =response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -35,7 +31,12 @@ public class MainPage extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/designcomponents/title.html").include(request,response);//imports online bootstrap libraries
 		out.println("</head>");
 		out.println("<body>");
+		if(session ==null){
 		request.getRequestDispatcher("WEB-INF/designcomponents/navbar.html").include(request,response);//navigation bar support
+		}
+		else{
+		request.getRequestDispatcher("WEB-INF/designcomponents/navbarlogout.html").include(request,response);//navigation bar support
+		}
 		request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		
 		out.println("<div class='container-fluid'>");
@@ -50,12 +51,17 @@ public class MainPage extends HttpServlet {
 		out.println("<div class='caption'>");
 		out.println("<h3>Mobile name retrived from db</h3>");
 		out.println("<p>mobile specs will also be retrived from database when the search result is submitted</p>");
-		out.println("<a class='btn btn-primary' href='#'>Buy</a>");
+		if(session == null){
+		out.println("<a class='btn btn-primary' href='UserLogin.view'>Buy</a>");
+		}
+		else{
+			out.println("<a class='btn btn-primary' href='#'>Buy</a>");
+		}
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</div>");
 		
-		out.println("<div class='col-md-4 col-xs-12'>");//three in one coloumn
+		out.println("<div class='col-md-4 col-xs-12'>");//three in one column
 		out.println("<div class='thumbnail'>");
 		out.println("<img src='images/mobilethumbnail.png' alt='mobile model name from db'>");
 		out.println("<div class='caption'>");
@@ -85,7 +91,10 @@ public class MainPage extends HttpServlet {
 		out.println("</footer>");
 		out.println("</body>");
 		out.println("</html>");
+		response.setHeader("Cache-control","no-cache,no-store");
+		response.setHeader("Pragma","no-cache");
+		response.setHeader("Expires", "-1");
 		
 	}
-	}
+	
 }

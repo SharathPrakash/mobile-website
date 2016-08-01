@@ -36,9 +36,12 @@ public class MainPageController extends HttpServlet {
 				
 	}
 	else{
+		String brand=request.getParameter("brand");
 		String[] rearCamera=request.getParameterValues("rearcamera");
 		String[] frontCamera=request.getParameterValues("frontcamera");
 		String[] screenSize=request.getParameterValues("screensize");
+		String price=request.getParameter("pricerange");
+	
 		for(String s:rearCamera){
 		out.println(s);
 		}

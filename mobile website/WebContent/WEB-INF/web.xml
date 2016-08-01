@@ -3,7 +3,7 @@
   <display-name>mobile website</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>UserLogin.view</welcome-file>
+    <welcome-file>MainPage.view</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/UserLogin.view")
 public class UserLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String logout="";
     Map<String,String> errors=new HashMap<>();
 	public UserLogin() {
         super();
@@ -23,6 +24,7 @@ public class UserLogin extends HttpServlet {
 		doPost(request,response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logout=(String)request.getAttribute("logout");
 		PrintWriter out = response.getWriter();
 		//error transporting from verification page
 		Map<String, String>errors=new HashMap<>();
@@ -42,6 +44,12 @@ public class UserLogin extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/designcomponents/navbar.html").include(request,response);//navigation bar support
 		request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		out.println("<div class='container'>");
+		if(request.getAttribute("logout")==null){
+			
+		}
+		else{
+		out.println("<p>"+logout+"</p>");
+		}
 		out.println("<form method='post' action='UserLoginVerify.do'>");
 		out.println("<div class='col-md-offset-3 col-xs-12' id='UserLogin'>");
 		out.println("<table class='table-condensed' >");
