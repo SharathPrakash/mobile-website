@@ -1,6 +1,5 @@
 package com.src.controller;
 
-import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
@@ -17,25 +16,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-//import com.mysql.jdbc.Connection;
+import com.src.model.SalesGuyModel;
 import com.src.model.UserLoginModel;
 
-@WebServlet("/UserConnection.do")
-public class UserConnection extends HttpServlet {
-	
+@WebServlet(description = "jndl connection for sales guy", urlPatterns = { "/SalesGuyConnection.do" })
+public class SalesGuyConnection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	public UserConnection() {
+       
+    public SalesGuyConnection() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request,response);
-	}
+		}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserLoginModel data=(UserLoginModel)request.getAttribute("data");
+		SalesGuyModel data=(SalesGuyModel)request.getAttribute("data");
 		PrintWriter out=response.getWriter();
 		try {
 			//connecting to database jndl
@@ -43,21 +40,19 @@ public class UserConnection extends HttpServlet {
 			DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/mobile_store");
 			Connection con =(Connection) ds.getConnection();
 			//calling procedure written in mysql mobile_store
-			CallableStatement cs=con.prepareCall("call passwordchecker(?,?,?)");
-			cs.setString(1,data.getEmail());
+			CallableStatement cs=con.prepareCall("call Employeepasswordchecker(?,?,?)");
+			cs.setString(1,data.getEmployeeId());
 			cs.setString(2,data.getPassword());
 			cs.setInt(3,Types.FLOAT);
 			ResultSet rs=cs.executeQuery();
 			while(rs.next()){
 			if(Integer.parseInt(rs.getString(1))==0){
 				request.setAttribute("invalid","Email or password is wrong please try again");//msg to be printed if login is unsuccessful
-				request.getRequestDispatcher("/UserLogin.view").forward(request, response);
+				request.getRequestDispatcher("/SalesGuyLogin.view").forward(request, response);
 			}
 			else{
-				HttpSession session=request.getSession();
-				session.setAttribute("connection", con);
-				request.getRequestDispatcher("/MainPage.view").forward(request,response);
-				
+				out.println("success");
+			//must redirect to the employee services
 			}
 			}
 		} catch (NamingException e) {
@@ -67,4 +62,5 @@ public class UserConnection extends HttpServlet {
 		}
 	}
 
-}
+	}
+

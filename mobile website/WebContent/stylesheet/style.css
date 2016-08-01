@@ -6,11 +6,15 @@ nav{
   background-color: white;
 }
 #navigation{
+  opacity: 0.95;
   outline: none;
   width:100%;
   background-color: white;
 }
-
+#navigation .navbar-brand span{
+  margin: 2rem;
+  color:rgb(154,51,52);
+}
 #navigation ul{
   outline: none;
   margin-top:-4.8rem;
@@ -18,7 +22,7 @@ nav{
 }
 #navigation li a{
   margin-right:3rem;
-  color: white;
+  color: rgb(33,124,126);
   border:3px solid rgb(33,124,126);
   border-radius: 10px;
   box-shadow: 5px 5px 1px 2px lightgrey;
@@ -44,10 +48,14 @@ nav{
  
   
 }
+#filter table{
+  box-shadow:4px 4px 2px 3px rgb(33,124,126);
+  border-radius:15px 15px 0px 15px;}
+#filter td{
+  padding: 2rem;
+  
+}
 
-
-
-
-
-
-
+#centralimage {
+  margin-top: 3rem;
+}

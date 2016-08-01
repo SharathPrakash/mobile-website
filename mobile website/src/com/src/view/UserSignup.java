@@ -64,6 +64,7 @@ public class UserSignup extends HttpServlet {
 		out.println("</head>");
 		out.println("<body bgcolor='white'>");
 		request.getRequestDispatcher("WEB-INF/designcomponents/navbar.html").include(request,response);
+		request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		out.println("<div class='container'>");
 		out.println("<form method='post' action='UserSignUpVerify.do'>");
 		out.println("<div class='col-md-offset-3 col-xs-12' id='UserLogin'>");
