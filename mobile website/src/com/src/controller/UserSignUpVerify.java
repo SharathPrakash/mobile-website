@@ -20,7 +20,7 @@ public class UserSignUpVerify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private String first_name,last_name,email_ID,password,repassword,address,city,state,pincode,mobnum;
-	String efirst_name,elast_name;
+	
     private Map<String,String> SignUperrors=new HashMap<String,String>();
 
     public UserSignUpVerify() {
@@ -56,14 +56,11 @@ public class UserSignUpVerify extends HttpServlet {
 		if(first_name==null||first_name.length()==0)
 		{
 			first_name="";
-			SignUperrors.put(efirst_name, "first name can't be left blank");
+			SignUperrors.put("firstName", "first name can't be left blank");
 			
 		}
 		else
-		{request.setAttribute("first_name",first_name);
-		request.setAttribute("SignUperrors", SignUperrors);
-		request.getRequestDispatcher("/UserSignup.view").forward(request, response);
-	
+		{
 			
 		}
 		
@@ -77,7 +74,7 @@ public class UserSignUpVerify extends HttpServlet {
 		
 		
 		else
-		{	request.setAttribute("last_name",last_name);
+		{	
 			request.setAttribute("SignUperrors", SignUperrors);
 			request.getRequestDispatcher("/UserSignup.view").forward(request, response);
 		
@@ -93,10 +90,7 @@ public class UserSignUpVerify extends HttpServlet {
 		
 		
 		else
-		{	request.setAttribute("email_ID",first_name);
-			request.setAttribute("SignUperrors", SignUperrors);
-			request.getRequestDispatcher("/UserSignup.view").forward(request, response);
-		
+		{	
 				
 		}
 		//password
@@ -108,10 +102,7 @@ public class UserSignUpVerify extends HttpServlet {
 			
 		}
 		else
-		{	request.setAttribute("password",password);
-			request.setAttribute("SignUperrors", SignUperrors);
-			request.getRequestDispatcher("/UserSignup.view").forward(request, response);
-		
+		{	
 				
 		}
 		//repassword

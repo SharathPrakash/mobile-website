@@ -2,7 +2,9 @@ package com.src.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.src.model.MainPageModel;
+import com.src.services.UserServiceClass;
+import com.src.services.UserServicesInterface;
 
 /**
  * Servlet implementation class MainPageController
@@ -42,19 +46,17 @@ public class MainPageController extends HttpServlet {
 		String[] screenSize=request.getParameterValues("screensize");
 		String price=request.getParameter("pricerange");
 	
-		for(String s:rearCamera){
-		out.println(s);
+		Connection con=(Connection)session.getAttribute("connection");
+		UserServicesInterface usi=new UserServiceClass();
+		usi.setConnection(con);		
+		try{
+		ResultSet rs=usi.getData(brand,rearCamera,frontCamera,screenSize,price);
+		request.setAttribute("rs",rs);
+		request.getRequestDispatcher("MainPage.view").forward(request, response);
 		}
-		
-		for(String s:frontCamera){
-			out.println(s);
-			}
-		
-		for(String s:screenSize){
-			out.println(s);
-			}
-			
-			
+		catch(SQLException exe){
+			log("failed to connect to database");
+		}
 	}
 	}
 

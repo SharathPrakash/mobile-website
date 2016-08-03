@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.src.model.SalesGuyModel;
-import com.src.model.UserLoginModel;
+
 
 @WebServlet(description = "jndl connection for sales guy", urlPatterns = { "/SalesGuyConnection.do" })
 public class SalesGuyConnection extends HttpServlet {
