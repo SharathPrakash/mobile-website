@@ -6,6 +6,8 @@ import java.util.HashMap;
 //import java.util.LinkedList;
 //import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +37,9 @@ public class UserLoginVerify extends HttpServlet {
 		email=request.getParameter("email").trim();
 		password=request.getParameter("password").trim();
 		//checking for errors in email
+		Pattern mail=Pattern.compile("@.*.com");
+		Matcher validemail=mail.matcher(email);
+		
 		if(email==null||email.length()==0){
 			email="";
 			errors.put("email","email cannot be left blank");
@@ -49,6 +54,22 @@ public class UserLoginVerify extends HttpServlet {
 				errors.put("password","password must be atleast 3 charecters");
 			}
 		
+		}
+		//email errors
+		
+		else if(!validemail.find()){
+			email="";
+			errors.put("email","not a valid email");
+			//checking for errors in password when there is error in email
+			if(password==null||password==""){
+				password="";
+				errors.put("password","password cannot be left blank");
+			}
+			
+			else if(password.length()<3){
+				password="";
+				errors.put("password","password must be atleast 3 charecters");
+			}
 		}
 		//checking for error in password when no error in email
 		else if(password==null||password==""){
@@ -85,5 +106,3 @@ public class UserLoginVerify extends HttpServlet {
 		
 		}
 	}
-
-

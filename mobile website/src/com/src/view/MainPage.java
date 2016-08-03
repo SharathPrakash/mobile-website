@@ -1,6 +1,8 @@
 package com.src.view;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,20 +63,30 @@ public class MainPage extends HttpServlet {
 			
 		out.println("<div class='col-md-4 col-xs-12'>");//three in one coloumn
 		out.println("<div class='thumbnail'>");
-		out.println("<img src='images/mobilethumbnail.png' alt='mobile model name from db'>");
+
+		out.println("<img src="+rs.getString(11)+">");
 		out.println("<div class='caption'>");
 		out.println("<h3>"+rs.getString(3)+"</h3>");
 		out.println("<p>"+rs.getString(4)+"</p>");
-		out.print("<p>Company Name</p><br>");
-		out.println("<p>"+rs.getString(5)+"</p>");
+		out.println("<table>");
+		out.println("<tr>");
+		out.print("<td>Company Name:- &nbsp;</td>");
+		out.println("<td>"+rs.getString(5)+"</td>");
+		out.println("</tr>");
 		
-		out.print("<p>Screen Size</p><br>");
-		out.println("<p>"+rs.getString(6)+"</p>");
-		out.print("<p>Front Camera</p>");
-		out.println("<p>"+rs.getString(9)+"</p>");
-		out.print("<p>rear camera</p>");
-		out.println("<p>"+rs.getString(10)+"</p>");
-		
+		out.println("<tr>");
+		out.print("<td>Screen Size</td>");
+		out.println("<td>"+rs.getString(6)+"</td>");
+		out.println("</tr>");
+		out.println("<tr>");
+		out.print("<td>Front Camera</td>");
+		out.println("<td>"+rs.getString(9)+"</td>");
+		out.println("</tr>");
+		out.println("<tr>");
+		out.print("<td>rear camera</td>");
+		out.println("<td>"+rs.getString(10)+"</td>");
+		out.println("</tr>");
+		out.println("</table>");
 		if(session == null){
 		out.println("<a class='btn btn-primary' href='UserLogin.view'>Buy</a>");
 		}
