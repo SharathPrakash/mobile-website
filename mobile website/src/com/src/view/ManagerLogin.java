@@ -11,19 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/SalesGuyLogin.view")
-public class SalesGuyLogin extends HttpServlet {
+@WebServlet("/ManagerLogin.view")
+public class ManagerLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Map<String,String> errors=new HashMap<>();
-	
-    public SalesGuyLogin() {
+    public ManagerLogin() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request,response);
-			}
+}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		//error transporting from verification page
@@ -46,49 +42,49 @@ public class SalesGuyLogin extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/designcomponents/employeeimage.html").include(request,response);//navigation bar support
 		
 		out.println("<div class='container'>");
-		out.println("<form method='post' action='SalesGuyVerify.do'>");
+		out.println("<form method='post' action='ManagerVerify.do'>");
 		out.println("<div class='col-md-5 col-xs-12' id='UserLogin'>");
 		out.println("<table class='table-condensed' >");
-		out.println("<th><h3>Employee-Login-Portal</h3></th>");
+		out.println("<th><h3>Manager-Login-Portal</h3></th>");
 		out.println("<br>");
 		//displaying message about invalid email or password
-		if(request.getAttribute("invalid")==null){
+		if(request.getAttribute("invalidManager")==null){
 		out.println("");
 		}
 		else{
-			out.println("<th><h5 style='color:red'> <span class='glyphicon glyphicon-remove-circle'></span> &nbsp"+request.getAttribute("invalid")+"</h5></th>");
+			out.println("<th><h5 style='color:red'> <span class='glyphicon glyphicon-remove-circle'></span> &nbsp"+request.getAttribute("invalidManager")+"</h5></th>");
 		}
 		//-----------------------------------------------//
 		//email retention code
 		
 
-		if(request.getAttribute("employeeId")==null){
-		employeeId="";
+		if(request.getAttribute("ManagerId")==null){
+		managerId="";
 		}
 		else
 		{
-			employeeId=(String)request.getAttribute("employeeId");
+			managerId=(String)request.getAttribute("ManagerId");
 		}
 		//---------------------------------------------//
 		
 		
 		out.println("<tr>");
 		out.println("<td>");
-		out.println("Employee-Id");
+		out.println("Manager-Id");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<input type='text' name='employeeid' value="+employeeId+">");
+		out.println("<input type='text' name='Managerid' value="+managerId+">");
 		out.println("</td>");
 		out.println("<td>");
 		//---------------------------//
 		//email error reporting 
 		if(!errors.isEmpty()){
-			if(errors.get("employeeid")==null){
+			if(errors.get("Managerid")==null){
 			out.println("");
 			}
 		else{
-			out.println("<p style='color:red'>"+errors.get("employeeid")+"</p>");
-			errors.put("employeeid","");
+			out.println("<p style='color:red'>"+errors.get("Managerid")+"</p>");
+			errors.put("Managerid","");
 			}
 		}
 		else{
@@ -110,11 +106,11 @@ public class SalesGuyLogin extends HttpServlet {
 		//password error reporting
 		if(!errors.isEmpty()){
 			
-			if(errors.get("password") == null||errors.get("password")==""){
-				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
+			if(errors.get("passwordManager") == null||errors.get("passwordManager")==""){
+				out.println("");
 			}
 			else{
-				out.println("<p style='color:red'>"+errors.get("password")+"</p>");
+				out.println("<p style='color:red'>"+errors.get("passwordManager")+"</p>");
 				errors.put("password","");
 			}
 			
@@ -132,20 +128,24 @@ public class SalesGuyLogin extends HttpServlet {
 		out.println("<input type='submit' value='Login'>");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<a href='ManagerLogin.view'>Manager Login</a>");
+		out.println("<a href='SalesGuyLogin.view'>Employee Login</a>");
 		out.println("</td>");
 		out.println("</tr>");
 
+		
+		out.println("</tr>");
 		out.println("</table>");
 		out.println("</div>");
 		out.println("</form>");
 		out.println("</div>");
+		
+		
+		
 		out.println("<footer>");
 		//getting footer from footer.html
 		request.getRequestDispatcher("WEB-INF/designcomponents/Footer.html").include(request,response);
 		out.println("</footer>");
 	}
+	
 
 }
-
-

@@ -41,30 +41,24 @@ public class MainPage extends HttpServlet {
 		else{
 		request.getRequestDispatcher("WEB-INF/designcomponents/navbarlogout.html").include(request,response);//navigation bar support
 		}
+		
 		request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		
 		out.println("<div class='container-fluid'>");
-		out.println("<div class='col-md-4 col-xs-12' id='filter'>");
-		request.getRequestDispatcher("WEB-INF/designcomponents/SideNav.html").include(request,response);//navigation bar support
-		out.println("</div>");
-		out.println("<div class='col-md-8'>");
+	
 		//main display area
 		ResultSet rs=(ResultSet)request.getAttribute("rs");
 		if(rs == null){
-		out.println("press the filter button");	
+		out.println("<h2>Welcome to the Mobile Store Search for the mobile you want using the filter option above</h2>");	
 		}
 		else{
 		try{
-			int count = 0;
-			out.println("<div class='row'>");
-			while(count<3){
-		
+			
 		while(rs.next()){
 			
-		out.println("<div class='col-md-4 col-xs-12'>");//three in one coloumn
+		out.println("<div class='col-md-12'>");
 		out.println("<div class='thumbnail'>");
-
-		out.println("<img src="+rs.getString(11)+">");
+		out.println("<img class='img-responsive' src="+rs.getString(11)+" style='width:50%'>");
 		out.println("<div class='caption'>");
 		out.println("<h3>"+rs.getString(3)+"</h3>");
 		out.println("<p>"+rs.getString(4)+"</p>");
@@ -87,6 +81,7 @@ public class MainPage extends HttpServlet {
 		out.println("<td>"+rs.getString(10)+"</td>");
 		out.println("</tr>");
 		out.println("</table>");
+		out.println("</br>");
 		if(session == null){
 		out.println("<a class='btn btn-primary' href='UserLogin.view'>Buy</a>");
 		}
@@ -96,18 +91,17 @@ public class MainPage extends HttpServlet {
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</div>");
-		count++;
 			}
-			out.println("</div>");
+	
 		}
-		}
+		
 		catch(SQLException exe){
 		log("database error");	
 		}
 		}
 		//session.invalidate();
 		out.println("</div>");
-		out.println("</div>");
+		
 		out.println("<footer>");
 		request.getRequestDispatcher("WEB-INF/designcomponents/Footer.html").include(request,response);//navigation bar support
 		out.println("</footer>");

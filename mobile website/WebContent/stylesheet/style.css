@@ -1,7 +1,4 @@
 
-#logo img{
-  width:30%;
-}
 nav{
   background-color: white;
 }
@@ -10,14 +7,15 @@ nav{
   outline: none;
   width:100%;
   background-color: white;
+	padding:3rem;
 }
 #navigation .navbar-brand span{
-  margin: 2rem;
+	margin: 2rem;
   color:rgb(154,51,52);
 }
 #navigation ul{
   outline: none;
-  margin-top:-4.8rem;
+  margin-top:-6rem;
   margin-right: 3rem;
 }
 #navigation li a{
@@ -48,14 +46,33 @@ nav{
  
   
 }
-#filter table{
-  box-shadow:4px 4px 2px 3px rgb(33,124,126);
-  border-radius:15px 15px 0px 15px;}
-#filter td{
-  padding: 2rem;
+#filter{
   
 }
 
 #centralimage {
-  margin-top: 3rem;
+  margin-top: 15rem;
 }
+
+#buttons {
+	margin:3rem;
+	padding:3rem;
+	color: rgb(33,124,126);
+  border:3px solid rgb(33,124,126);
+  border-radius: 10px;
+  box-shadow: 5px 5px 1px 2px lightgrey;
+	
+}
+
+
+#footer{
+ position: absolute;
+ left:0;
+ right:0;
+  bottom: 0;
+  color: rgb(33,124,126);
+  
+  background-color:white;
+  text-align: center;
+}
+

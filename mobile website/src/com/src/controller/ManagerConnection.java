@@ -19,21 +19,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import com.src.model.SalesGuyModel;
+import com.src.model.ManagerModel;
 
 
-@WebServlet(description = "jndl connection for sales guy", urlPatterns = { "/SalesGuyConnection.do" })
-public class SalesGuyConnection extends HttpServlet {
+@WebServlet("/ManagerConnection.do")
+public class ManagerConnection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public SalesGuyConnection() {
+    public ManagerConnection() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request,response);
 		}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SalesGuyModel data=(SalesGuyModel)request.getAttribute("data");
+		ManagerModel data=(ManagerModel)request.getAttribute("data");
 		PrintWriter out=response.getWriter();
 		try {
 			//connecting to database jndl
@@ -41,20 +41,20 @@ public class SalesGuyConnection extends HttpServlet {
 			DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/mobile_store");
 			Connection con =(Connection) ds.getConnection();
 			//calling procedure written in mysql mobile_store
-			CallableStatement cs=con.prepareCall("call Employeepasswordchecker(?,?,?)");
-			cs.setString(1,data.getEmployeeId());
+			CallableStatement cs=con.prepareCall("call Managerpasswordchecker(?,?,?)");
+			cs.setString(1,data.getManagerId());
 			cs.setString(2,data.getPassword());
 			cs.setInt(3,Types.FLOAT);
 			ResultSet rs=cs.executeQuery();
 			while(rs.next()){
 			if(Integer.parseInt(rs.getString(1))==0){
-				request.setAttribute("invalid","Email or password is wrong please try again");//msg to be printed if login is unsuccessful
-				request.getRequestDispatcher("/SalesGuyLogin.view").forward(request, response);
+				request.setAttribute("invalidManager","Email or password is wrong please try again");//msg to be printed if login is unsuccessful
+				request.getRequestDispatcher("/ManagerLogin.view").forward(request, response);
 			}
 			else{
 				HttpSession session=request.getSession();
 				session.setAttribute("connection", con);
-				request.getRequestDispatcher("/SalesGuyPage.view").forward(request,response);
+				request.getRequestDispatcher("/ManagerPage.view").forward(request,response);
 				
 			}
 			}
@@ -66,4 +66,5 @@ public class SalesGuyConnection extends HttpServlet {
 	}
 
 	}
+
 
