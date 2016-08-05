@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.src.model.ManagerModel;
-import com.src.model.SalesGuyModel;
+
 
 @WebServlet("/ManagerVerify.do")
 public class ManagerVerify extends HttpServlet {

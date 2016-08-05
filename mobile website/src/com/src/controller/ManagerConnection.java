@@ -1,7 +1,7 @@
 package com.src.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -34,7 +34,7 @@ public class ManagerConnection extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ManagerModel data=(ManagerModel)request.getAttribute("data");
-		PrintWriter out=response.getWriter();
+	
 		try {
 			//connecting to database jndl
 			Context ctx=new InitialContext();

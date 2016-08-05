@@ -1,8 +1,6 @@
 package com.src.view;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +42,7 @@ public class MainPage extends HttpServlet {
 		
 		request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		
-		out.println("<div class='container-fluid'>");
+		out.println("<div class='container'>");
 	
 		//main display area
 		ResultSet rs=(ResultSet)request.getAttribute("rs");
@@ -56,37 +54,42 @@ public class MainPage extends HttpServlet {
 			
 		while(rs.next()){
 			
-		out.println("<div class='col-md-12'>");
+		out.println("<div class='col-md-offset-2 col-md-8'>");
 		out.println("<div class='thumbnail'>");
 		out.println("<img class='img-responsive' src="+rs.getString(11)+" style='width:50%'>");
 		out.println("<div class='caption'>");
-		out.println("<h3>"+rs.getString(3)+"</h3>");
-		out.println("<p>"+rs.getString(4)+"</p>");
+		out.println("<h2>"+rs.getString(3)+"</h2>");
+		out.println("<h4>"+rs.getString(4)+"</h4>");
 		out.println("<table>");
 		out.println("<tr>");
-		out.print("<td>Company Name:- &nbsp;</td>");
-		out.println("<td>"+rs.getString(5)+"</td>");
+		out.print("<td><h4>Company Name:- &nbsp;</h4></td>");
+		out.println("<td><h4>"+rs.getString(5)+"</h4></td>");
 		out.println("</tr>");
 		
 		out.println("<tr>");
-		out.print("<td>Screen Size</td>");
-		out.println("<td>"+rs.getString(6)+"</td>");
+		out.print("<td><h4>Screen Size</h4></td>");
+		out.println("<td><h4>"+rs.getString(6)+" inches</h4></td>");
 		out.println("</tr>");
 		out.println("<tr>");
-		out.print("<td>Front Camera</td>");
-		out.println("<td>"+rs.getString(9)+"</td>");
+		out.print("<td><h4>Front Camera</h4></td>");
+		out.println("<td><h4>"+rs.getString(9)+" Mp</h4></td>");
 		out.println("</tr>");
 		out.println("<tr>");
-		out.print("<td>rear camera</td>");
-		out.println("<td>"+rs.getString(10)+"</td>");
+		out.print("<td><h4>Rear Camera</h4></td>");
+		out.println("<td><h4>"+rs.getString(10)+" Mp</h4></td>");
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</br>");
 		if(session == null){
-		out.println("<a class='btn btn-primary' href='UserLogin.view'>Buy</a>");
+		out.println("<a class='btn btn-primary' href='UserLogin.view'><h4>Buy</h4></a>");
 		}
 		else{
+			if(Integer.parseInt(rs.getString(12))==0){
+				out.println("<a class='btn btn-primary disabled' href='#'>out of stock</a>");
+			}
+			else{
 			out.println("<a class='btn btn-primary' href='#'>Buy</a>");
+			}
 		}
 		out.println("</div>");
 		out.println("</div>");

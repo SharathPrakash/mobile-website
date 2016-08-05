@@ -5,5 +5,6 @@ import java.sql.SQLException;
 public interface UserServicesInterface {
 	
 	void setConnection(Connection con);
-	ResultSet getData(String brand, String[] rearCamera, String[] frontCamera, String[] screenSize, String price) throws SQLException;
+	ResultSet getData(String brand, int rearCamera, int frontCamera, int screenSize, int price)
+			throws SQLException;
 }

@@ -29,7 +29,7 @@ public class SalesGuyLogin extends HttpServlet {
 		//error transporting from verification page
 		Map<String, String>errors=new HashMap<>();
 		 String employeeId="";
-		 String managerId="";
+		 
 		if(!(request.getAttribute("errors") == null)){
 			errors.putAll((HashMap<String,String>)request.getAttribute("errors"));
 		}

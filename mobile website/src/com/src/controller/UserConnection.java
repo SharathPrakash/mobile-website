@@ -2,7 +2,7 @@ package com.src.controller;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-//import com.mysql.jdbc.Connection;
 import com.src.model.UserLoginModel;
 
 @WebServlet("/UserConnection.do")
@@ -36,7 +35,7 @@ public class UserConnection extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserLoginModel data=(UserLoginModel)request.getAttribute("data");
-		PrintWriter out=response.getWriter();
+	
 		try {
 			//connecting to database jndl
 			Context ctx=new InitialContext();
