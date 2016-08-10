@@ -102,7 +102,7 @@ public class SalesGuyLogin extends HttpServlet {
 		out.println("password");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<input type='password' name='password'>");
+		out.println("<input type='password' id='password' name='password'>");
 		out.println("</td>");
 		
 		out.println("<td>");

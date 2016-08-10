@@ -98,7 +98,7 @@ public class ManagerLogin extends HttpServlet {
 		out.println("password");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<input type='password' name='password'>");
+		out.println("<input type='password' id='password' name='password'>");
 		out.println("</td>");
 		
 		out.println("<td>");
@@ -107,7 +107,7 @@ public class ManagerLogin extends HttpServlet {
 		if(!errors.isEmpty()){
 			
 			if(errors.get("passwordManager") == null||errors.get("passwordManager")==""){
-				out.println("");
+				out.println("<p id='jpwd' style='color:red'></p>");
 			}
 			else{
 				out.println("<p style='color:red'>"+errors.get("passwordManager")+"</p>");
@@ -116,7 +116,7 @@ public class ManagerLogin extends HttpServlet {
 			
 		}
 		else{
-			out.println("");
+			out.println("<p id='jpwd' style='color:red'></p>");
 			
 		}
 		out.println("</td>");
