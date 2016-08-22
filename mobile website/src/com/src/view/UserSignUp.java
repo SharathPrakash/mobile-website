@@ -42,7 +42,8 @@ public class UserSignUp extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		//error transporting from verification page
-				Map<String, String>SignUpErrors=new HashMap<String,String>();
+				Map<String,String>SignUpErrors=new HashMap<String,String>();
+				
 				String firstName,lastName,emailId,password,repassword,address,city,state,pincode,mobnum;
 				
 				if(!(request.getAttribute("SignUperrors") == null)){
@@ -62,9 +63,11 @@ public class UserSignUp extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/designcomponents/title.html").include(request,response);
 		out.println("</head>");
 		out.println("<body bgcolor='white'>");
-		request.getRequestDispatcher("WEB-INF/designcomponents/navbar.html").include(request,response);
+		request.getRequestDispatcher("WEB-INF/designcomponents/signUpNav.html").include(request,response);
 		//request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		out.println("<div class='container'>");
+		out.println("<br>");
+		out.println("<br>");
 		out.println("<form method='post' action='UserSignUpVerify.do'>");
 		out.println("<div class='col-md-offset-3 col-xs-12' id='UserLogin'>");
 		out.println("<table class='table-condensed' >");
@@ -184,6 +187,14 @@ public class UserSignUp extends HttpServlet {
 			out.println("<input type='password' name='password'>");
 			out.println("</td>");
 			out.println("<td>");
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("password")!=null)
+				{
+					out.println("<p style='color:red'>"+SignUpErrors.get("password")+"</p>");
+					SignUpErrors.put("password","");
+					
+				}
+			}
 			
 			out.println("</td>");
 		out.println("</tr>");
@@ -198,6 +209,14 @@ public class UserSignUp extends HttpServlet {
 			out.println("<input type='password' name='repassword'>");
 			out.println("</td>");
 			out.println("<td>");
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("repassword")!=null)
+				{
+					out.println("<p style='color:red'>"+SignUpErrors.get("repassword")+"</p>");
+					SignUpErrors.put("repassword","");
+					
+				}
+			}
 			
 			out.println("</td>");
 		out.println("</tr>");

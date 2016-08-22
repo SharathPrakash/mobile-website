@@ -147,6 +147,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertuserdetail`(in emailId varchar(45),in firstname varchar(45),in lastname varchar(45),in passwor varchar(45),in addreess varchar(100),in city varchar(45),in state varchar(45),in pincode int,in mobnum varchar(13))
+BEGIN
+insert into user_detail(emailId,firstname,lastname,passwor,address,city,state,pincode,mobnum)
+values(emilId,firstname,lastname,passwor,address,city,state,pincode,mobnum);
+
+END
+
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `securitykeyretriver`(in email1 varchar(50), out securitykey1 float)
 BEGIN
 select securitykey into securitykey1 from user_login where email=email1;

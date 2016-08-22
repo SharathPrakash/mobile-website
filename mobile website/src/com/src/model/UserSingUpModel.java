@@ -2,7 +2,9 @@ package com.src.model;
 
 public class UserSingUpModel {
 
-	private String firstName,lastName,emailId,password,address,city,state,pincode,mobnum;
+	private String firstName,lastName,emailId,password,address,city,state,mobnum;
+	int pincode;
+	
 
 	public UserSingUpModel(String firstName,String lastName,String emailId,String password,String address,String city,String state,String pincode,String mobnum)
 	{
@@ -15,7 +17,7 @@ public class UserSingUpModel {
 		
 		this.address = address;
 		this.state = state;
-		this.pincode = pincode;
+		this.pincode =Integer.parseInt(pincode);
 		this.mobnum = mobnum;
 		
 		
@@ -47,7 +49,7 @@ public class UserSingUpModel {
 		return state;
 	}
 
-	public String getPincode() {
+	public int getPincode() {
 		return pincode;
 	}
 

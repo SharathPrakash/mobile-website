@@ -47,7 +47,13 @@ nav{
   
 }
 #filter{
-  
+	font-size:1.5rem;
+	color:rgb(33,124,126);
+	
+}
+#filter select{
+	border:3px solid rgb(33,124,126);
+	border-radius:15px 0px 15px 0px;
 }
 
 #centralimage {

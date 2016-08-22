@@ -26,6 +26,7 @@ public class UserSignUpVerify extends HttpServlet {
 	private String firstName,lastName,emailId,password,repassword,address,city,state,pincode,mobnum;
 	
     Map<String,String> SignUperrors=new HashMap<String,String>();
+    
 
     public UserSignUpVerify() {
         super();
@@ -59,7 +60,13 @@ public class UserSignUpVerify extends HttpServlet {
 		state=request.getParameter("state").trim();
 		pincode=request.getParameter("pincode").trim();
 		mobnum=request.getParameter("mobnum").trim();
-		List<UserSingUpModel> userDetails=new LinkedList<UserSingUpModel>();
+		LinkedList<UserSingUpModel> userDetails=new LinkedList<UserSingUpModel>();
+		 if((request.getAttribute("unerror")!=null))
+		    {
+		    	SignUperrors.putAll((HashMap<String,String>)request.getAttribute("unerror"));
+		    	
+		    }
+
 		//first name 
 		if(firstName==null||firstName.length()==0)
 		{
@@ -97,7 +104,7 @@ public class UserSignUpVerify extends HttpServlet {
 		
 		if(!password.equals(repassword) )
 		{
-			SignUperrors.put("password", "password not matching");
+			SignUperrors.put("repassword", "password not matching");
 			password=repassword="";
 						
 		}
@@ -147,7 +154,9 @@ public class UserSignUpVerify extends HttpServlet {
 		
 		if(SignUperrors.isEmpty())
 		{
-			userDetails.add(new UserSingUpModel());
+			userDetails.add(new UserSingUpModel(firstName,lastName,emailId,password,address,city,state,pincode,mobnum));
+			request.setAttribute("userDetails", userDetails);
+			request.getRequestDispatcher("/UserDetailConnection.do").forward(request, response);
 		}
 		else
 		{
@@ -169,6 +178,4 @@ public class UserSignUpVerify extends HttpServlet {
 		
 	}
 	
-	
-
 }
