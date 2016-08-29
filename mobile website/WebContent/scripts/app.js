@@ -1,20 +1,23 @@
 var main=function(){
-	$('#password').keypress(
-	function(event){
-		var pwd=$(this).val();
-		if(pwd.length<3){
-			$('#jpwd').text("password too short");
-			
-		}
-		else{
-			$('#jpwd').text("");
-			
-		}
+	
+	$("#Managerid").change(function(){
+		/*$("#managererror").text("script is working");*/
+	$.get("AjaxManagerVerify.do", $(this).serialize(), function(data){
+			$("#managererror").text(data);
+		});//eoget
 		
-	}		
-	);
+		
+	});
+	
+	$("#password").change(function(){
+		//$("#passworderror").text("script is working");
+		$.get("AjaxManagerVerify.do", $(this).serialize(), function(data){
+			$("#passworderror").text(data);
+		});//eoget
+		
+		
+	});
 	
 	
-	
-}
+};
 $(document).ready(main);

@@ -36,7 +36,7 @@ public class UserLogin extends HttpServlet {
 		//------------------------------------------//
 		out.println("<!Doctype html>");
 		out.println("<head>");
-		request.getRequestDispatcher("WEB-INF/designcomponents/title.html").include(request,response);//imports online bootstrap libraries
+		request.getRequestDispatcher("WEB-INF/designcomponents/usertitle.html").include(request,response);//imports online bootstrap libraries
 		out.println("</head>");
 		out.println("<body bgcolor='white'>");
 		request.getRequestDispatcher("WEB-INF/designcomponents/navbar.html").include(request,response);//navigation bar support
@@ -79,22 +79,23 @@ public class UserLogin extends HttpServlet {
 		out.println("E-mail");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<input type='text' name='email' value="+email+">");
+		out.println("<input type='text' id='email' name='email' value="+email+">");
 		out.println("</td>");
 		out.println("<td>");
 		//---------------------------//
 		//email error reporting 
+		out.println("<p style='color:red' id='emailerror'></p>");
 		if(!errors.isEmpty()){
 			if(errors.get("email")==null){
-			out.println("");
+			out.println("<p style='color:rgb(154,51,52)' id='emailerror'></p>");
 			}
 		else{
-			out.println("<p style='color:rgb(154,51,52)'>"+errors.get("email")+"</p>");
+			out.println("<p style='color:rgb(154,51,52)' id='emailerror'>"+errors.get("email")+"</p>");
 			errors.put("email","");
 			}
 		}
 		else{
-			out.println("");
+			out.println("<p style='color:red' id='emailerror'></p>");
 		}
 		out.println("</td>");
 		//-------------------------------//
@@ -113,7 +114,7 @@ public class UserLogin extends HttpServlet {
 		if(!errors.isEmpty()){
 			
 			if(errors.get("password") == null||errors.get("password")==""){
-				out.println("");
+				out.println("<p style='color:red' id='passworderror'></p>");
 			}
 			else{
 				out.println("<p style='color:rgb(154,51,52)'>"+errors.get("password")+"</p>");
@@ -122,7 +123,7 @@ public class UserLogin extends HttpServlet {
 			
 		}
 		else{
-			out.println("");
+			out.println("<p style='color:red' id='passworderror'></p>");
 			
 		}
 		out.println("</td>");

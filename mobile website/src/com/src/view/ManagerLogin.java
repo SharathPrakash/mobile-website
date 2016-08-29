@@ -73,14 +73,16 @@ public class ManagerLogin extends HttpServlet {
 		out.println("Manager-Id");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<input type='text' name='Managerid' value="+managerId+">");
+		out.println("<input type='text' id='Managerid' name='Managerid' value="+managerId+">");
 		out.println("</td>");
 		out.println("<td>");
+		out.println("<p style='color:red' id='managererror'></p>");
+		
 		//---------------------------//
-		//email error reporting 
+		//managerid error reporting 
 		if(!errors.isEmpty()){
 			if(errors.get("Managerid")==null){
-			out.println("");
+			out.println("<p id='managererror'></p>");
 			}
 		else{
 			out.println("<p style='color:red'>"+errors.get("Managerid")+"</p>");
@@ -102,12 +104,14 @@ public class ManagerLogin extends HttpServlet {
 		out.println("</td>");
 		
 		out.println("<td>");
+		out.println("<p id='passworderror' style='color:red'></p>");
+		
 		//-------------------------------------//
 		//password error reporting
 		if(!errors.isEmpty()){
 			
 			if(errors.get("passwordManager") == null||errors.get("passwordManager")==""){
-				out.println("<p id='jpwd' style='color:red'></p>");
+				out.println("<p id='passworderror' style='color:red'></p>");
 			}
 			else{
 				out.println("<p style='color:red'>"+errors.get("passwordManager")+"</p>");
@@ -116,7 +120,7 @@ public class ManagerLogin extends HttpServlet {
 			
 		}
 		else{
-			out.println("<p id='jpwd' style='color:red'></p>");
+			out.println("<p id='passworderror' style='color:red'></p>");
 			
 		}
 		out.println("</td>");
