@@ -38,9 +38,10 @@ public class UserLogin extends HttpServlet {
 		out.println("<head>");
 		request.getRequestDispatcher("WEB-INF/designcomponents/usertitle.html").include(request,response);//imports online bootstrap libraries
 		out.println("</head>");
+		
 		out.println("<body bgcolor='white'>");
-		request.getRequestDispatcher("WEB-INF/designcomponents/navbar.html").include(request,response);//navigation bar support
-		request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
+		request.getRequestDispatcher("WEB-INF/designcomponents/signUpNav.html").include(request,response);//navigation bar support
+		//request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		out.println("<div class='container'>");
 		if(request.getAttribute("logout")==null){
 			
@@ -48,11 +49,16 @@ public class UserLogin extends HttpServlet {
 		else{
 		out.println("<p>"+logout+"</p>");
 		}
+		out.println("<br>");
+		out.println("<br>");
 		out.println("<form method='post' action='UserLoginVerify.do'>");
 		out.println("<div class='col-md-offset-3 col-xs-12' id='UserLogin'>");
 		out.println("<table class='table-condensed' >");
 		out.println("<th><h2>Login</h2></th>");
 		out.println("<br>");
+		
+		
+		
 		//displaying message about invalid email or password
 		if(request.getAttribute("invalid")==null){
 		out.println("");
@@ -134,7 +140,7 @@ public class UserLogin extends HttpServlet {
 		out.println("<input type='submit' value='Login'>");
 		out.println("</td>");
 		out.println("<td>");
-		out.println("<a href='UserSignup.view' style='color:rgb(154,51,52)'>New User?</a>");
+		out.println("<a href='UserSignUp.view' style='color:rgb(154,51,52)'>New User?</a>");
 		out.println("</td>");
 
 		out.println("</tr>");

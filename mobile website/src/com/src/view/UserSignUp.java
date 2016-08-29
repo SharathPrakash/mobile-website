@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserSignup
  */
-@WebServlet("/UserSignup.view")
-public class UserSignup extends HttpServlet {
+@WebServlet("/UserSignUp.view")
+public class UserSignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserSignup() {
+    public UserSignUp() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +32,7 @@ public class UserSignup extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	doPost(request,response);	
+	
 	}
 
 	/**
@@ -41,31 +42,32 @@ public class UserSignup extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		//error transporting from verification page
-				Map<String, String>SignUperrors=new HashMap<String,String>();
-				String first_name,last_name,password,repassword,email_ID,address,city,state,pincode,mobnum;
+				Map<String,String>SignUpErrors=new HashMap<String,String>();
+				
+				String firstName,lastName,emailId,password,repassword,address,city,state,pincode,mobnum;
 				
 				if(!(request.getAttribute("SignUperrors") == null)){
-					SignUperrors.putAll((HashMap<String,String>)request.getAttribute("SignUperrors"));
+					SignUpErrors.putAll((HashMap<String,String>)request.getAttribute("SignUperrors"));
 		
 					
 				}
-				
-					
 				else{
-						SignUperrors.clear();			
+						SignUpErrors.clear();
+						
 					}
 				
 				
-		
 		
 		out.println("<!Doctype html>");
 		out.println("<head>");
 		request.getRequestDispatcher("WEB-INF/designcomponents/title.html").include(request,response);
 		out.println("</head>");
 		out.println("<body bgcolor='white'>");
-		request.getRequestDispatcher("WEB-INF/designcomponents/navbar.html").include(request,response);
-		request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
+		request.getRequestDispatcher("WEB-INF/designcomponents/signUpNav.html").include(request,response);
+		//request.getRequestDispatcher("WEB-INF/designcomponents/centralimage.html").include(request,response);//navigation bar support
 		out.println("<div class='container'>");
+		out.println("<br>");
+		out.println("<br>");
 		out.println("<form method='post' action='UserSignUpVerify.do'>");
 		out.println("<div class='col-md-offset-3 col-xs-12' id='UserLogin'>");
 		out.println("<table class='table-condensed' >");
@@ -76,29 +78,28 @@ public class UserSignup extends HttpServlet {
 			out.println("<td>");
 			out.println("First name");
 			out.println("</td>");
-			if(request.getAttribute("first_name")==null){
-				first_name="";
+			if(request.getAttribute("firstName")==null){
+				firstName="";
 				}
 				else
 				{
-					first_name=(String)request.getAttribute("efirst_name");
+					firstName=(String)request.getAttribute("firstName");
 				}
-			
+
 			out.println("<td>");
-			out.println("<input type='text' name='first_name' value="+first_name+">");
+			out.println("<input type='text' name='firstName' value="+firstName+">");
 			out.println("</td>");
 			out.println("<td>");
 			
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("efirst_name")==null){
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("firstName")==null){
 					out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
-					
 					
 					
 							}
 			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("efirst_name")+"</p>");
-				SignUperrors.put("efirst_name","");
+				out.println("<p style='color:red'>"+SignUpErrors.get("firstName")+"</p>");
+				SignUpErrors.put("firstName","");
 				
 				}
 			}
@@ -114,25 +115,25 @@ public class UserSignup extends HttpServlet {
 			out.println("<td>");
 			out.println("Last name");
 			out.println("</td>");
-			if(request.getAttribute("last_name")==null){
-				last_name="";
+			if(request.getAttribute("lastName")==null){
+				lastName="";
 				}
 				else
 				{
-					last_name=(String)request.getAttribute("first_name");
+					lastName=(String)request.getAttribute("lastName");
 				}
-			
+
 			out.println("<td>");
-			out.println("<input type='text' name='last_name'value="+last_name+">");
+			out.println("<input type='text' name='lastName' value="+lastName+">");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("last_name")==null){
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("lastName")==null){
 				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 				}
 			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("last_name")+"</p>");
-				SignUperrors.put("last_name","");
+				out.println("<p style='color:red'>"+SignUpErrors.get("lastName")+"</p>");
+				SignUpErrors.put("lastName","");
 				}
 			}
 			else{
@@ -147,25 +148,25 @@ public class UserSignup extends HttpServlet {
 			out.println("<td>");
 			out.println("Email ID");
 			out.println("</td>");
-			if(request.getAttribute("email_ID")==null){
-				email_ID="";
+			if(request.getAttribute("emailId")==null){
+				emailId="";
 				}
 				else
 				{
-					email_ID=(String)request.getAttribute("email_ID");
+					emailId=(String)request.getAttribute("emailId");
 				}
-			
+
 			out.println("<td>");
-			out.println("<input type='text' name='email_ID' value="+email_ID+">");
+			out.println("<input type='text' name='emailId' value="+emailId+">");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("email_ID")==null){
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("emailId")==null){
 				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 				}
 			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("email_ID")+"</p>");
-				SignUperrors.put("email_ID","");
+				out.println("<p style='color:red'>"+SignUpErrors.get("emailId")+"</p>");
+				SignUpErrors.put("emailId","");
 				}
 			}
 			else{
@@ -180,29 +181,21 @@ public class UserSignup extends HttpServlet {
 			out.println("<td>");
 			out.println("Password");
 			out.println("</td>");
-			if(request.getAttribute("password")==null){
-				password="";
-				}
-				else
-				{
-					password=(String)request.getAttribute("password");
-				}
+			
+
 			out.println("<td>");
-			out.println("<input type='text' name='password'>");
+			out.println("<input type='password' name='password'>");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("password")==null){
-				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
-				}
-			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("password")+"</p>");
-				SignUperrors.put("password","");
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("password")!=null)
+				{
+					out.println("<p style='color:red'>"+SignUpErrors.get("password")+"</p>");
+					SignUpErrors.put("password","");
+					
 				}
 			}
-			else{
-				out.println("");
-			}
+			
 			out.println("</td>");
 		out.println("</tr>");
 		
@@ -212,30 +205,19 @@ public class UserSignup extends HttpServlet {
 			out.println("<td>");
 			out.println("Confirm Password");
 			out.println("</td>");
-			if(request.getAttribute("repassword")==null){
-				repassword="";
-				}
-				else
-				{
-					repassword=(String)request.getAttribute("repassword");
-				}
-			
 			out.println("<td>");
-			out.println("<input type='text' name='repassword'>");
+			out.println("<input type='password' name='repassword'>");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("repassword")==null){
-				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
-				}
-			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("repassword")+"</p>");
-				SignUperrors.put("repassword","");
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("repassword")!=null)
+				{
+					out.println("<p style='color:red'>"+SignUpErrors.get("repassword")+"</p>");
+					SignUpErrors.put("repassword","");
+					
 				}
 			}
-			else{
-				out.println("");
-			}
+			
 			out.println("</td>");
 		out.println("</tr>");
 		
@@ -252,21 +234,22 @@ public class UserSignup extends HttpServlet {
 				{
 					address=(String)request.getAttribute("address");
 				}
-			
+
 			out.println("<td>");
 			out.println("<input type='text'name='address' value="+address+">");
 		out.println("</td>");
 		out.println("<td>");
-		if(!SignUperrors.isEmpty()){
-			if(SignUperrors.get("address")==null){
+		if(!SignUpErrors.isEmpty()){
+			if(SignUpErrors.get("address")==null){
 			out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 			}
 		else{
-			out.println("<p style='color:red'>"+SignUperrors.get("address")+"</p>");
-			SignUperrors.put("address","");
+			out.println("<p style='color:red'>"+SignUpErrors.get("address")+"</p>");
+			SignUpErrors.put("address","");
 			}
 		}
 		else{
+			
 			out.println("");
 		}
 		out.println("</td>");
@@ -290,13 +273,13 @@ public class UserSignup extends HttpServlet {
 			out.println("<input type='text' name='city' value="+city+">");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("city")==null){
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("city")==null){
 				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 				}
 			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("city")+"</p>");
-				SignUperrors.put("city","");
+				out.println("<p style='color:red'>"+SignUpErrors.get("city")+"</p>");
+				SignUpErrors.put("city","");
 				}
 			}
 			else{
@@ -323,13 +306,13 @@ public class UserSignup extends HttpServlet {
 			out.println("<input type='text' name='state' value="+state+">");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("state")==null){
+		if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("state")==null){
 				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 				}
 			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("state")+"</p>");
-				SignUperrors.put("state","");
+				out.println("<p style='color:red'>"+SignUpErrors.get("state")+"</p>");
+				SignUpErrors.put("state","");
 				}
 			}
 			else{
@@ -338,7 +321,7 @@ public class UserSignup extends HttpServlet {
 			out.println("</td>");
 		out.println("</tr>");
 		
-		
+
 		//pincode
 		out.println("<tr>");
 			out.println("<td>");
@@ -356,13 +339,13 @@ public class UserSignup extends HttpServlet {
 			out.println("<input type='text' name='pincode' value="+pincode+">");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("pincode")==null){
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("pincode")==null){
 				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 				}
 			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("pincode")+"</p>");
-				SignUperrors.put("pincode","");
+				out.println("<p style='color:red'>"+SignUpErrors.get("pincode")+"</p>");
+				SignUpErrors.put("pincode","");
 				}
 			}
 			else{
@@ -371,7 +354,7 @@ public class UserSignup extends HttpServlet {
 			out.println("</td>");
 		out.println("</tr>");
 		
-		
+
 		//mobnum
 		out.println("<tr>");
 			out.println("<td>");
@@ -389,15 +372,16 @@ public class UserSignup extends HttpServlet {
 			out.println("<input type='text' name='mobnum' value="+mobnum+">");
 			out.println("</td>");
 			out.println("<td>");
-			if(!SignUperrors.isEmpty()){
-				if(SignUperrors.get("mobnum")==null){
+			if(!SignUpErrors.isEmpty()){
+				if(SignUpErrors.get("mobnum")==null){
 				out.println("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
 				}
 			else{
-				out.println("<p style='color:red'>"+SignUperrors.get("mobnum")+"</p>");
-				SignUperrors.put("mobnum","");
+				out.println("<p style='color:red'>"+SignUpErrors.get("mobnum")+"</p>");
+				SignUpErrors.put("mobnum","");
 				}
 			}
+
 			else{
 				out.println("");
 			}

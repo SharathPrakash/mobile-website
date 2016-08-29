@@ -51,15 +51,16 @@ public class UserConnection extends HttpServlet {
 			if(Integer.parseInt(rs.getString(1))==0){
 				request.setAttribute("invalid","Email or password is wrong please try again");//msg to be printed if login is unsuccessful
 				request.getRequestDispatcher("/UserLogin.view").forward(request, response);
-			}
+				}
 			else{
 				HttpSession session=request.getSession();
 				session.setAttribute("connection", con);
 				request.getRequestDispatcher("/MainPage.view").forward(request,response);
 				
+				}
 			}
-			}
-		} catch (NamingException e) {
+		  }
+		catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
